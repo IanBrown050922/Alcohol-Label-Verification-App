@@ -1,8 +1,8 @@
 # Alcohol Label Verifier
 
-AI-assisted review for alcohol label applications.
+AI review for alcohol label applications.
 
-The app compares submitted alcohol label artwork against structured application data and returns a field-by-field verification report. It is built to help reviewers quickly answer the routine matching questions that appear in label review:
+The app compares submitted alcohol label artwork against application data and returns a field-by-field verification report. It is built to help reviewers quickly answer the routine matching questions that appear in label review:
 
 * Does the brand name match?
 * Does the class/type match?
@@ -10,39 +10,136 @@ The app compares submitted alcohol label artwork against structured application 
 * Does the net contents statement match?
 * Is the required government warning present?
 * Are optional origin/address fields consistent when provided?
-
-The app is a verification assistant. It does not connect to COLAs Online, does not use government IDs, and does not make legal approval decisions.
+* If there is a mismatch, where and why?
 
 ## Live App
 
-Add deployed URL here before submission:
+The live application is deployed at this URL:
 
 ```text
-https://your-deployed-app-url
+https://alcohol-label-verifier.streamlit.app
 ```
 
 ## Core Concept
 
 A review unit is one product submission:
 
-```text
-one application JSON
-+ 1-10 label images
-```
+- one JSON with application details
+- 1-10 label images
 
 All images in a review unit are treated as one unordered evidence set. Users do not need to name files in a specific way, upload them in a specific order, or classify them as front, back, neck, strip, or brand labels.
 
 This keeps the workflow simple: the user provides the application data and the related label images, and the app checks whether the label evidence matches the application.
 
-## Design Decisions
+## Approach, Assumptions, and Tradeoffs
 
-The app is standalone because the review flow should be testable without access to COLAs Online, internal IDs, or existing export formats.
+This app was designed around the review workflow described in the project brief: reviewers compare application data against submitted label artwork, and much of the work is routine matching across brand name, class/type, alcohol content, net contents, and the government warning. The goal was to make that review faster without making the reviewer learn a complicated new workflow.
 
-The input format is intentionally simple. Single Review uses one JSON editor and one image uploader. Batch Review uses a ZIP file where each folder is one review unit. This avoids requiring users to manually map images to applications in a large batch.
+### Standalone input format
 
-The app uses OpenAI Vision for this version because the difficult part is reading and comparing unordered label images quickly. A separate OCR pipeline or self-hosted model could be added later, but this version prioritizes a working, fast, evidence-backed review flow.
+The app does not connect to COLAs Online, so it uses a simple standalone input: one application JSON plus 1-10 label images.
 
-Uploaded files are processed only for the active verification run and are not permanently stored by the app.
+This keeps the prototype testable without knowing or depending on any internal COLA export format, ID system, image naming convention, or label-role workflow.
+
+
+### JSON for application data
+
+Application data is represented as JSON because the fields need to be structured, readable, and easy to validate. JSON also works well with LLM/VLM prompts because the model can clearly distinguish application fields from other information.
+
+The Single Review screen uses a JSON editor instead of a separate form and JSON-upload flow. This keeps the interface smaller while still supporting manual entry, pasted JSON, and uploaded `.json` files.
+
+### Unordered image sets
+
+The app treats all images attached to a review unit as one unordered evidence set.
+
+This avoids requiring users to classify images as front, back, neck, strip, or brand labels. The user only needs to provide the images that belong to the product. The app then determines whether the required information appears somewhere in the submitted label artwork.
+
+### ZIP-based batch review
+
+Batch Review uses a ZIP file because it is the simplest common way to package many files. Each folder in the ZIP is one review unit.
+
+The app accepts both common ZIP structures.
+
+Review-unit folders directly in the ZIP:
+
+```text
+batch.zip
+  old-tom-distillery/
+    application.json
+    label1.png
+    label2.jpg
+
+  cedar-hill-wine/
+    application.json
+    front.png
+    back.png
+```
+
+Review-unit folders in a parent folder in the ZIP:
+
+```text
+batch.zip
+  label-review-batch/
+    old-tom-distillery/
+      application.json
+      label1.png
+      label2.jpg
+
+    cedar-hill-wine/
+      application.json
+      front.png
+      back.png
+```
+
+Before verification, the app shows a preview table so users can catch missing JSON files, unsupported images, invalid folders, or other input problems before model calls are made.
+
+### OpenAI Vision instead of self-hosted models
+
+I considered self-hosting the model for data-control reasons. I decided against it for this version because fast local vision-language inference would require GPU hosting, model-serving infrastructure, and additional operational complexity.
+
+For this project, the priority was a working review assistant that responds quickly, produces useful field-level evidence, and can be deployed without managing GPUs or model servers. The app therefore uses OpenAI Vision through server-side Python.
+
+The model boundary is isolated in the code, so a future version could point the same review flow to Azure OpenAI, a government-approved model endpoint, or a self-hosted VLM if production requirements demand it.
+
+### VLM-first instead of OCR-first
+
+I also considered a multi-stage pipeline: OCR extraction, custom parsing, deterministic matching, and then an LLM for edge cases.
+
+I chose a VLM-first approach because the images may be unordered, incomplete, noisy, or split across multiple label panels. A vision-language model can read the images and reason over the full evidence set in one pass.
+
+This keeps the system simpler and reduces the amount of hand-tuned parsing logic needed for the first working version.
+
+### Structured output and validation
+
+The app does not simply trust free-form model text. It requests structured output and validates the response before displaying it.
+
+Each result must include an overall status, field-level checks, application values, label values found, evidence text, source image filename when available, and a reason. If the model call fails, times out, or returns malformed output, the app marks the affected review unit as `cannot_verify` instead of crashing or guessing.
+
+### Why `cannot_verify` exists
+
+Not every label image can be read confidently. Some images may be blurry, cropped, low-contrast, or missing required information.
+
+The app uses `cannot_verify` when it cannot confidently determine whether a field passes or needs correction. This is safer than forcing every result into pass/fail and mirrors how a human reviewer would request clearer evidence rather than approve or deny based on unreadable material.
+
+### Data handling
+
+Uploaded JSON and label images are processed only for the active verification run and are not permanently stored by the app. The app avoids persistent upload directories and does not log uploaded JSON, image content, base64 image data, full prompts, full responses, or API keys.
+
+Using OpenAI means the application JSON and label images are sent to OpenAI for inference. This version is intended for data appropriate for that environment, such as synthetic, public, or non-sensitive product-label data. A production deployment with restricted records should use an approved hosted model or self-hosted model endpoint.
+
+### User experience
+
+The interface is intentionally simple and step-based. The goal is to make the next action obvious: provide application JSON, upload label images, verify, and review the field-level results.
+
+Batch Review includes a data preview step so users can fix problems with review-unit file structure before spending time or model calls on verification. Results use three statuses only: `pass`, `needs_correction`, and `cannot_verify`.
+
+### Known limitations
+
+This app is a verification assistant, not a legal determination tool.
+
+It does not perform full beverage-law compliance review, does not connect to COLAs Online, does not infer label roles, and does not verify typography, contrast, character density, or physical label placement. It also does not include a separate OCR fallback in this version.
+
+Those tradeoffs were made to keep the first version focused on the core workflow: fast, evidence-backed comparison of application data against submitted label images.
 
 ## What It Checks
 
@@ -74,7 +171,7 @@ GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink
 
 It checks the warning text and `GOVERNMENT WARNING` heading. It does not verify font size, boldness, contrast, character density, or physical label placement.
 
-## Quick Start
+## Quick Start Instructions
 
 ### macOS/Linux
 
@@ -96,7 +193,7 @@ Copy-Item .env.example .env
 streamlit run app.py
 ```
 
-Before running live verification, edit `.env` or `local.env`:
+*Before* running live verification, edit `.env` or `local.env`:
 
 ```env
 OPENAI_API_KEY=your-openai-api-key
@@ -226,14 +323,6 @@ Batch Review shows a Data Preview table before model calls. It includes product,
 
 Invalid units are included in final results as `cannot_verify`; they are not silently skipped.
 
-## Data Handling
-
-Uploaded JSON and images are processed only for the active verification run and are not permanently stored by the app.
-
-The app avoids persistent upload directories and does not log uploaded JSON, image content, base64 image data, full prompts, full responses, or API keys.
-
-Live verification sends the application JSON and label images to OpenAI for inference. Use only data appropriate for your OpenAI account, organization policy, and deployment environment.
-
 ## Configuration
 
 Environment variables:
@@ -264,24 +353,9 @@ The frontend never calls OpenAI directly. Server-side Python sends each review u
 
 The app validates and normalizes model output before rendering it. If the API call fails, times out, or returns malformed output, that review unit becomes `cannot_verify`.
 
-## Deployment
-
-The app is designed for Streamlit Community Cloud or similar Python hosting.
-
-For Streamlit Community Cloud, configure secrets in the app settings:
-
-```toml
-OPENAI_API_KEY = "your-openai-api-key"
-OPENAI_MODEL = "gpt-5.4-nano"
-```
-
-Do not commit `.env`, `local.env`, `.streamlit/secrets.toml`, API keys, cache files, raw data, project instructions, or generated Python cache directories.
-
-`.streamlit/config.toml` is safe to commit; it only controls the Streamlit theme.
-
 ## Sample Data
 
-Single Review samples:
+Synthetic Single Review samples:
 
 ```text
 sample_data/single/passing/
@@ -289,7 +363,7 @@ sample_data/single/mismatch/
 sample_data/single/missing-field/
 ```
 
-Batch samples:
+Synthetic Batch samples:
 
 ```text
 sample_data/batch/sample_batch.zip
@@ -300,6 +374,30 @@ To regenerate synthetic samples:
 
 ```bash
 python scripts/generate_sample_data.py
+```
+
+Public real-label examples are also available under `sample_data/real_cola/`. These are generated from the COLA Cloud sample pack, which is based on public TTB COLA records. The ignored raw data folder, `raw_data/cola-sample-pack-v1/`, contains the extracted COLA data from https://colacloud.us/sample-pack.
+
+Single Review real-label examples:
+
+```text
+sample_data/real_cola/single_review_examples/passing/
+sample_data/real_cola/single_review_examples/mismatch/
+sample_data/real_cola/single_review_examples/cannot_verify/
+```
+
+Batch Review real-label sample:
+
+```text
+sample_data/real_cola/real_cola_batch.zip
+```
+
+The real-label sample set also includes `sample_data/real_cola/manifest.json` and `sample_data/real_cola/README.md`. Passing examples use public real metadata and label images. Mismatch examples intentionally alter one application field. Cannot-verify examples are intentionally incomplete or damaged for testing.
+
+To regenerate the real COLA sample set from the ignored raw data package:
+
+```bash
+python scripts/prepare_real_cola_data.py --input raw_data/cola-sample-pack-v1 --passing 20 --mismatches 5 --cannot-verify 3
 ```
 
 ## Tests
@@ -357,8 +455,6 @@ sample_data/
 **Missing API key:** Set `OPENAI_API_KEY` in `.env`, `local.env`, shell environment, or Streamlit secrets.
 
 **Model unavailable or schema errors:** Try `OPENAI_MODEL=gpt-5.4-mini`, then run `python scripts/smoke_openai.py`.
-
-**OpenAI dashboard shows zero usage:** Confirm the API key belongs to the selected OpenAI project, check the project filter/date range, and allow for dashboard delay. The app logs HTTP status lines when OpenAI calls are made, but does not log prompts or file contents.
 
 **Image rejected:** Use `.jpg`, `.jpeg`, `.jpe`, or `.png`; keep files under `MAX_IMAGE_MB`.
 
