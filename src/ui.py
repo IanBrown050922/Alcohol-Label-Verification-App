@@ -99,8 +99,10 @@ def _render_single_review(config: AppConfig) -> None:
         uploaded_json = st.file_uploader(
             "Load a JSON file into the editor",
             type=["json"],
+            accept_multiple_files=False,
             key="single_json_file",
             help=f"JSON only. Keep files under {MAX_JSON_UPLOAD_MB} MB.",
+            on_change=_handle_single_json_upload,
         )
 
     _maybe_load_uploaded_json(uploaded_json)
@@ -162,9 +164,23 @@ def _render_single_review(config: AppConfig) -> None:
         _render_result(result, download_key="single_download")
 
 
+def _handle_single_json_upload() -> None:
+    _maybe_load_uploaded_json(st.session_state.get("single_json_file"))
+
+
 def _maybe_load_uploaded_json(uploaded_json: object) -> None:
     if uploaded_json is None:
         return
+    if isinstance(uploaded_json, list):
+        if len(uploaded_json) == 0:
+            return
+        if len(uploaded_json) > 1:
+            st.session_state["single_json_error"] = (
+                "Upload one application JSON file only. Current editor content was preserved."
+            )
+            return
+        uploaded_json = uploaded_json[0]
+
     data = uploaded_json.getvalue()
     signature = f"{getattr(uploaded_json, 'name', '')}:{hashlib.sha256(data).hexdigest()}"
     if st.session_state.pop("suppress_next_json_autoload", False):
