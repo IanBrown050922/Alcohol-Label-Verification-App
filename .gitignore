@@ -1,2 +1,14 @@
+project_instructions.md
 **/junk/
 local.env
+.env
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.log
+.pytest_cache/
+.streamlit/secrets.toml
+raw_data/
+sample_data/real_cola/review_units/
+sample_data/real_cola/*.zip
+raw_data

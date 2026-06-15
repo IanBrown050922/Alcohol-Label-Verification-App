@@ -1,0 +1,563 @@
+{
+  "source": "COLA Cloud sample pack",
+  "source_input_dir": "raw_data/cola-sample-pack-v1",
+  "generated_at": "2026-06-15T05:12:41.387264+00:00",
+  "records_read": 1000,
+  "image_rows_read": 1756,
+  "passing_units_created": 20,
+  "mismatch_units_created": 5,
+  "cannot_verify_units_created": 3,
+  "skipped_records": {
+    "missing_required_metadata": 108,
+    "unsupported_product_type": 8
+  },
+  "failed_image_downloads": [],
+  "units": [
+    {
+      "folder": "sample_data/real_cola/review_units/passing_001_25309001000285",
+      "kind": "passing",
+      "source_ttb_id": "25309001000285",
+      "source_image_ids": [
+        "25309001000285_1",
+        "25309001000285_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Montagner",
+        "class_type": "sparkling wine/champagne",
+        "alcohol_content": "11.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "italy",
+        "country_of_origin": "Italy"
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_002_25323001000860",
+      "kind": "passing",
+      "source_ttb_id": "25323001000860",
+      "source_image_ids": [
+        "25323001000860_0",
+        "25323001000860_1",
+        "25323001000860_2",
+        "25323001000860_3"
+      ],
+      "application_json": {
+        "product_type": "distilled_spirits",
+        "brand_name": "Adversary",
+        "class_type": "whisky specialties",
+        "alcohol_content": "50.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "connecticut",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_003_25324001000163",
+      "kind": "passing",
+      "source_ttb_id": "25324001000163",
+      "source_image_ids": [
+        "25324001000163_1",
+        "25324001000163_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Taylor Made",
+        "class_type": "table flavored wine",
+        "alcohol_content": "12.5",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "texas",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_004_25337001000089",
+      "kind": "passing",
+      "source_ttb_id": "25337001000089",
+      "source_image_ids": [
+        "25337001000089_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "2 Black Dogs",
+        "class_type": "vermouth/mixed types",
+        "alcohol_content": "18.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "pennsylvania",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_005_25342001000137",
+      "kind": "passing",
+      "source_ttb_id": "25342001000137",
+      "source_image_ids": [
+        "25342001000137_0",
+        "25342001000137_1"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Wound Tight",
+        "class_type": "table red wine",
+        "alcohol_content": "12.5",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "virginia",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_006_25349001000069",
+      "kind": "passing",
+      "source_ttb_id": "25349001000069",
+      "source_image_ids": [
+        "25349001000069_0",
+        "25349001000069_1"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Violot Guillemard",
+        "class_type": "table white wine",
+        "alcohol_content": "13.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "france",
+        "country_of_origin": "France"
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_007_25349001000808",
+      "kind": "passing",
+      "source_ttb_id": "25349001000808",
+      "source_image_ids": [
+        "25349001000808_0",
+        "25349001000808_1"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Gualicho",
+        "class_type": "table red wine",
+        "alcohol_content": "14.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "argentina",
+        "country_of_origin": "Argentina"
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_008_25351001000654",
+      "kind": "passing",
+      "source_ttb_id": "25351001000654",
+      "source_image_ids": [
+        "25351001000654_0",
+        "25351001000654_1"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Anandam",
+        "class_type": "rose wine",
+        "alcohol_content": "13.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "california",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_009_25351001000665",
+      "kind": "passing",
+      "source_ttb_id": "25351001000665",
+      "source_image_ids": [
+        "25351001000665_1",
+        "25351001000665_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Anandam",
+        "class_type": "rose wine",
+        "alcohol_content": "13.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "california",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_010_25353001000483",
+      "kind": "passing",
+      "source_ttb_id": "25353001000483",
+      "source_image_ids": [
+        "25353001000483_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Duplin",
+        "class_type": "table red wine",
+        "alcohol_content": "10.5",
+        "net_contents": "375.0 milliliters",
+        "name_and_address": "north carolina",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_011_25353001000488",
+      "kind": "passing",
+      "source_ttb_id": "25353001000488",
+      "source_image_ids": [
+        "25353001000488_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Duplin",
+        "class_type": "table red wine",
+        "alcohol_content": "12.0",
+        "net_contents": "375.0 milliliters",
+        "name_and_address": "north carolina",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_012_25353001000491",
+      "kind": "passing",
+      "source_ttb_id": "25353001000491",
+      "source_image_ids": [
+        "25353001000491_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Duplin",
+        "class_type": "table red wine",
+        "alcohol_content": "10.5",
+        "net_contents": "375.0 milliliters",
+        "name_and_address": "north carolina",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_013_25353001000511",
+      "kind": "passing",
+      "source_ttb_id": "25353001000511",
+      "source_image_ids": [
+        "25353001000511_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Great Notion",
+        "class_type": "ale",
+        "alcohol_content": "6.3",
+        "net_contents": "1.0 pints",
+        "name_and_address": "oregon",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_014_25353001000518",
+      "kind": "passing",
+      "source_ttb_id": "25353001000518",
+      "source_image_ids": [
+        "25353001000518_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Great Notion",
+        "class_type": "ale",
+        "alcohol_content": "6.8",
+        "net_contents": "1.0 pints",
+        "name_and_address": "oregon",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_015_25353001000536",
+      "kind": "passing",
+      "source_ttb_id": "25353001000536",
+      "source_image_ids": [
+        "25353001000536_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Other Half Brewing Co",
+        "class_type": "beer",
+        "alcohol_content": "4.5",
+        "net_contents": "1.0 pints",
+        "name_and_address": "new york",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_016_25353001000537",
+      "kind": "passing",
+      "source_ttb_id": "25353001000537",
+      "source_image_ids": [
+        "25353001000537_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Great Notion",
+        "class_type": "ale",
+        "alcohol_content": "7.0",
+        "net_contents": "1.0 pints",
+        "name_and_address": "oregon",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_017_25353001000594",
+      "kind": "passing",
+      "source_ttb_id": "25353001000594",
+      "source_image_ids": [
+        "25353001000594_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Melvin Brewing",
+        "class_type": "malt beverages specialities - flavored",
+        "alcohol_content": "4.6",
+        "net_contents": "1.0 pints",
+        "name_and_address": "wyoming",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_018_25353001000654",
+      "kind": "passing",
+      "source_ttb_id": "25353001000654",
+      "source_image_ids": [
+        "25353001000654_0",
+        "25353001000654_1",
+        "25353001000654_2"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Goose Island Beer Co.",
+        "class_type": "ale",
+        "alcohol_content": "4.2",
+        "net_contents": "12.0 fluid ounces",
+        "name_and_address": "illinois",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_019_25355001000109",
+      "kind": "passing",
+      "source_ttb_id": "25355001000109",
+      "source_image_ids": [
+        "25355001000109_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Golden Imported Beer",
+        "class_type": "beer",
+        "alcohol_content": "4.0",
+        "net_contents": "1.0 pints",
+        "name_and_address": "el salvador",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/passing_020_25355001000115",
+      "kind": "passing",
+      "source_ttb_id": "25355001000115",
+      "source_image_ids": [
+        "25355001000115_0"
+      ],
+      "application_json": {
+        "product_type": "malt_beverage",
+        "brand_name": "Golden Extra Imported Beer",
+        "class_type": "beer",
+        "alcohol_content": "4.6",
+        "net_contents": "1.0 pints",
+        "name_and_address": "el salvador",
+        "country_of_origin": null
+      },
+      "mutation": null
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/mismatch_001_25309001000285",
+      "kind": "mismatch",
+      "source_ttb_id": "25309001000285",
+      "source_image_ids": [
+        "25309001000285_1",
+        "25309001000285_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Montagner",
+        "class_type": "sparkling wine/champagne",
+        "alcohol_content": "12",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "italy",
+        "country_of_origin": "Italy"
+      },
+      "mutation": {
+        "field": "alcohol_content",
+        "original_value": "11.0",
+        "new_value": "12"
+      }
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/mismatch_002_25323001000860",
+      "kind": "mismatch",
+      "source_ttb_id": "25323001000860",
+      "source_image_ids": [
+        "25323001000860_0",
+        "25323001000860_1",
+        "25323001000860_2",
+        "25323001000860_3"
+      ],
+      "application_json": {
+        "product_type": "distilled_spirits",
+        "brand_name": "Adversary",
+        "class_type": "whisky specialties",
+        "alcohol_content": "50.0",
+        "net_contents": "1 liter",
+        "name_and_address": "connecticut",
+        "country_of_origin": null
+      },
+      "mutation": {
+        "field": "net_contents",
+        "original_value": "750.0 milliliters",
+        "new_value": "1 liter"
+      }
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/mismatch_003_25324001000163",
+      "kind": "mismatch",
+      "source_ttb_id": "25324001000163",
+      "source_image_ids": [
+        "25324001000163_1",
+        "25324001000163_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Heritage Reserve",
+        "class_type": "table flavored wine",
+        "alcohol_content": "12.5",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "texas",
+        "country_of_origin": null
+      },
+      "mutation": {
+        "field": "brand_name",
+        "original_value": "Taylor Made",
+        "new_value": "Heritage Reserve"
+      }
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/mismatch_004_25337001000089",
+      "kind": "mismatch",
+      "source_ttb_id": "25337001000089",
+      "source_image_ids": [
+        "25337001000089_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "2 Black Dogs",
+        "class_type": "vermouth/mixed types",
+        "alcohol_content": "19",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "pennsylvania",
+        "country_of_origin": null
+      },
+      "mutation": {
+        "field": "alcohol_content",
+        "original_value": "18.0",
+        "new_value": "19"
+      }
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/mismatch_005_25342001000137",
+      "kind": "mismatch",
+      "source_ttb_id": "25342001000137",
+      "source_image_ids": [
+        "25342001000137_0",
+        "25342001000137_1"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Wound Tight",
+        "class_type": "table red wine",
+        "alcohol_content": "12.5",
+        "net_contents": "1 liter",
+        "name_and_address": "virginia",
+        "country_of_origin": null
+      },
+      "mutation": {
+        "field": "net_contents",
+        "original_value": "750.0 milliliters",
+        "new_value": "1 liter"
+      }
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/cannot_verify_001_blurred_downscaled_image_25273001000802",
+      "kind": "cannot_verify",
+      "source_ttb_id": "25273001000802",
+      "source_image_ids": [
+        "25273001000802_0"
+      ],
+      "application_json": {
+        "product_type": "distilled_spirits",
+        "brand_name": "Arthur Wheeler Spirits Company",
+        "class_type": "whisky specialties",
+        "alcohol_content": "50.5",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "maryland",
+        "country_of_origin": null
+      },
+      "mutation": null,
+      "cannot_verify_reason": "blurred_downscaled_image"
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/cannot_verify_002_missing_required_field_net_contents_25307001000088",
+      "kind": "cannot_verify",
+      "source_ttb_id": "25307001000088",
+      "source_image_ids": [
+        "25307001000088_0",
+        "25307001000088_1"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Flor D'penalva",
+        "class_type": "table red wine",
+        "alcohol_content": "20.0",
+        "name_and_address": "portugal",
+        "country_of_origin": "Portugal"
+      },
+      "mutation": null,
+      "cannot_verify_reason": "missing_required_field_net_contents"
+    },
+    {
+      "folder": "sample_data/real_cola/review_units/cannot_verify_003_corrupt_label_image_25323001000734",
+      "kind": "cannot_verify",
+      "source_ttb_id": "25323001000734",
+      "source_image_ids": [
+        "25323001000734_1",
+        "25323001000734_0"
+      ],
+      "application_json": {
+        "product_type": "wine",
+        "brand_name": "Ellie Rose Vinelli",
+        "class_type": "sparkling wine/champagne",
+        "alcohol_content": "11.0",
+        "net_contents": "750.0 milliliters",
+        "name_and_address": "italy",
+        "country_of_origin": "Italy"
+      },
+      "mutation": null,
+      "cannot_verify_reason": "corrupt_label_image"
+    }
+  ]
+}
