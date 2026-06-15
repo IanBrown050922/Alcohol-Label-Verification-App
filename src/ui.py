@@ -598,6 +598,8 @@ def _inject_css() -> None:
             --alv-mode-accent: #6ea8d8;
             --alv-mode-accent-hover: #86b7df;
             --alv-mode-accent-text: #06131f;
+            --alv-section-accent: #6f9f7d;
+            --alv-section-bg: rgba(111, 159, 125, 0.10);
         }
         .css-18e3th9, .block-container {
             padding-top: 1.8rem !important;
@@ -703,8 +705,8 @@ def _inject_css() -> None:
             margin: 1rem 0 0.65rem 0;
         }
         .section-heading {
-            border-left: 4px solid var(--alv-mode-accent);
-            background: rgba(110, 168, 216, 0.08);
+            border-left: 4px solid var(--alv-section-accent);
+            background: var(--alv-section-bg);
             padding: 1rem 1.15rem;
             border-radius: 6px;
             margin: 2.4rem 0 0.9rem 0;
@@ -713,8 +715,8 @@ def _inject_css() -> None:
         .verify-section,
         .batch-section,
         .plain-section {
-            border-left-color: var(--alv-mode-accent);
-            background: rgba(110, 168, 216, 0.08);
+            border-left-color: var(--alv-section-accent);
+            background: var(--alv-section-bg);
         }
         .section-heading h2 {
             margin: 0 0 0.25rem 0;
